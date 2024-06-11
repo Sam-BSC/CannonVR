@@ -13,13 +13,14 @@ public class BowlingSimulation : MonoBehaviour
 
     public Rigidbody testBowlingBall;
     public Transform bowlingBallStartPositionPlaceholder;
+    public Transform bowlingBallIdlePositionPlaceholder;
     public PinsManager pinsManager;
 
     public void Start()
     {
         //StartCoroutine(PendTestLaunch());
         testBowlingBall.isKinematic = true;
-        testBowlingBall.position = bowlingBallStartPositionPlaceholder.position;
+        testBowlingBall.position = bowlingBallIdlePositionPlaceholder.position;
     }
     public void Update()
     {
@@ -33,14 +34,16 @@ public class BowlingSimulation : MonoBehaviour
             pinsManager.ResetAllPins();
 
             testBowlingBall.isKinematic = true;
-            testBowlingBall.position = bowlingBallStartPositionPlaceholder.position;
+            testBowlingBall.position = bowlingBallIdlePositionPlaceholder.position;
         }
     }
     // wait for 2 seconds and launch the ball
     IEnumerator PendTestLaunch()
     {
         //yield return new WaitForSeconds(2f);
-
+        testBowlingBall.isKinematic = true;
+        testBowlingBall.position = bowlingBallStartPositionPlaceholder.position;
+        yield return null;
         testBowlingBall.isKinematic = false;
         //testBowlingBall.useGravity = true;
         yield return null;
